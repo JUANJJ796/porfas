@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>¡Feliz Cumpleaños!</title>
+    <style>
+        body {
+            background-color: #0a0a2a;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+        h1 {
+            color: #ff4d88;
+            font-size: 52px;
+            margin: 30px 0;
+            animation: bounce 2s ease-in-out infinite;
+            text-shadow: 
+                0 0 10px rgba(255, 77, 136, 0.7),
+                2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .mensaje {
+            font-size: 28px;
+            color: #ffffff;
+            margin: 40px auto;
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.7),
+                0 0 20px rgba(255, 255, 255, 0.3);
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        .decoracion {
+            font-size: 50px;
+            margin: 20px;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255,255,255,0.7);
+            letter-spacing: 10px;
+        }
+        .torta {
+            width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            position: relative;
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
+
+        .torta-container {
+            position: relative;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        /* Eliminar el efecto de brillo del contenedor */
+        .torta::before {
+            display: none;
+        }
+
+        /* Ajustar el texto de la torta */
+        .torta p {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.8em;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.7),
+                0 0 15px rgba(255, 255, 255, 0.3);
+            margin-top: 0;
+            letter-spacing: 1px;
+            position: absolute;
+            width: 100%;
+            bottom: -60px;
+            left: 0;
+            text-align: center;
+        }
+
+        .torta-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 150px;
+            background: linear-gradient(to right, #ff9ecd, #ff70b8);
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(255,105,180,0.3);
+        }
+
+        .torta-capa {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 70px;
+            background: linear-gradient(to right, #fff0f5, #ffd1dc);
+            border-radius: 12px;
+        }
+
+        .vela {
+            position: absolute;
+            width: 10px;
+            height: 35px;
+            background: linear-gradient(to right, #fff, #ffe4e1);
+            border-radius: 4px;
+        }
+
+        .llama {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #ffeb3b;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 1s ease-in-out infinite;
+            transform: translateX(-50%);
+            filter: drop-shadow(0 0 8px #ffeb3b) 
+                   drop-shadow(0 0 12px #ff8c00);
+        }
+
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .emoji-gift {
+            font-size: 40px;
+            display: inline-block;
+            animation: rotate 3s linear infinite;
+        }
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        /* Nuevos estilos para el carrusel de lunas */
+        .moon-carousel {
+            width: 500px;
+            height: 500px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin-top: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .moon-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 12px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            gap: 20px;
+        }
+
+        .carousel-button {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            padding: 15px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .carousel-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Estilos para el fondo estrellado */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle-star var(--duration) infinite;
+        }
+
+        @keyframes twinkle-star {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Ajustar el contenedor principal */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            padding: 0 20px;
+        }
+
+        /* Mejorar responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+                padding: 0 15px;
+            }
+            
+            .mensaje {
+                font-size: 24px;
+            }
+            
+            .decoracion {
+                font-size: 40px;
+                letter-spacing: 5px;
+            }
+            
+            .torta p {
+                font-size: 1.5em;
+            }
+        }
+
+        .globos-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .globo {
+            position: absolute;
+            font-size: 60px;
+            animation: floatGlobo var(--duration) ease-in-out infinite;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));
+            transform-origin: bottom center;
+            z-index: 2;
+        }
+
+        @keyframes floatGlobo {
+            0% {
+                transform: translate(var(--start-x), 100vh) rotate(0deg);
+            }
+            50% {
+                transform: translate(
+                    calc(var(--start-x) + var(--wobble)), 
+                    calc(50vh + var(--offset))
+                ) rotate(var(--rotate));
+            }
+            100% {
+                transform: translate(var(--start-x), -100px) rotate(0deg);
+            }
+        }
+
+        .mensaje-torta {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.7),
+                0 0 15px rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+            line-height: 1.6;
+            padding: 20px;
+            text-align: center;
+            margin: 60px auto 20px;
+            max-width: 800px;
+        }
+
+        .audio-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            font-size: 30px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .audio-player:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            font-size: 30px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .apagar-velas {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .apagar-velas:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .llama.apagada {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <header>
+        <div class="decoracion">🎈 🎂 🎈</div>
+        <h1>¡Feliz Cumpleaños!</h1>
+    </header>
+
+    <main class="main-content">
+        <div class="mensaje">
+            <p>Tu eres alguien, increible, se que  tiene momentos dificiles en tu vida
+                Pero hoy es un día especial para usted, deseo que hoy tenga un lindo día,
+                recuerde usted es importante en esta vida, tienes que vivir hasta los 80 recuerdelo.</P>
+                <P>LE DESEO UN FELÍZ CUMPLEAÑOS.
+            </p>
+            
+        </div>
+
+        <div class="torta">
+            <div class="torta-container">
+                <div class="torta-base"></div>
+                <div class="torta-capa"></div>
+                
+                <!-- Vela central -->
+                <div class="vela" style="bottom: 220px; left: 50%; transform: translateX(-50%);">
+                    <div class="llama" style="bottom: 35px;"></div>
+                </div>
+                
+                <!-- Vela izquierda -->
+                <div class="vela" style="bottom: 220px; left: 35%; transform: translateX(-50%);">
+                    <div class="llama" style="bottom: 35px;"></div>
+                </div>
+                
+                <!-- Vela derecha -->
+                <div class="vela" style="bottom: 220px; left: 65%; transform: translateX(-50%);">
+                    <div class="llama" style="bottom: 35px;"></div>
+                </div>
+                
+                <!-- Vela izquierda exterior -->
+                <div class="vela" style="bottom: 220px; left: 20%; transform: translateX(-50%);">
+                    <div class="llama" style="bottom: 35px;"></div>
+                </div>
+                
+                <!-- Vela derecha exterior -->
+                <div class="vela" style="bottom: 220px; left: 80%; transform: translateX(-50%);">
+                    <div class="llama" style="bottom: 35px;"></div>
+                </div>
+            </div>
+            <button class="apagar-velas" onclick="apagarVelas()">🌬️ Soplar las Velas</button>
+        </div>
+
+        <div class="mensaje-torta">
+            Si las estrellas pudieran hablar, dirían que envidia tu brillo.<br>
+            Ningún cielo nocturno se compara con la luz que emanas.
+        </div>
+
+        <div class="moon-carousel">
+            <img class="moon-image" src="" alt="Luna mágica">
+            <div class="carousel-buttons">
+                <button class="carousel-button" onclick="prevMoon()">⬅️</button>
+                <button class="carousel-button" onclick="nextMoon()">➡️</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="decoracion">✨ 🎉 ✨</div>
+    </footer>
+
+    <div class="globos-container">
+        <!-- Los globos se agregarán dinámicamente con JavaScript -->
+    </div>
+
+    <div class="audio-player" style="display: none;">
+        <audio id="background-music" loop autoplay volume="1.0">
+            <source src="Locos(MP3_320K).mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <div class="music-control" onclick="toggleMusic()">
+        🔊
+    </div>
+
+    <script>
+        function createSparkles() {
+            for(let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(sparkle);
+            }
+        }
+        createSparkles();
+
+        // Código para crear el fondo estrellado
+        function createStarryBackground() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Tamaño aleatorio para cada estrella
+                const size = Math.random() * 3;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                // Posición aleatoria
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Duración aleatoria de la animación
+                star.style.setProperty('--duration', 2 + Math.random() * 3 + 's');
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Llamar a la función para crear el fondo estrellado
+        createStarryBackground();
+
+        // Agregar efecto de brillo extra a algunas estrellas
+        setInterval(() => {
+            const stars = document.querySelectorAll('.star');
+            const randomStar = stars[Math.floor(Math.random() * stars.length)];
+            randomStar.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                randomStar.style.transform = 'scale(1)';
+            }, 300);
+        }, 1000);
+
+        // Función para crear globos animados
+        function createGlobos() {
+            const globosContainer = document.querySelector('.globos-container');
+            const globosEmojis = ['🎈', '🎈', '🎀', '🎊', '🎉', '💝', '💖', '🦄', '🌸', '⭐', '🌟', '✨'];
+            
+            function createGlobo() {
+                const globo = document.createElement('div');
+                globo.className = 'globo';
+                globo.textContent = globosEmojis[Math.floor(Math.random() * globosEmojis.length)];
+                
+                // Configurar variables CSS personalizadas para la animación más rápida
+                const startX = Math.random() * 100 + 'vw';
+                const duration = 8 + Math.random() * 6 + 's';
+                const wobble = (Math.random() * 60 - 30) + 'vw';
+                const offset = (Math.random() * 60 - 30) + 'vh';
+                const rotate = (Math.random() * 1080 - 540) + 'deg';
+                const scale = 0.6 + Math.random() * 0.8;
+                
+                globo.style.setProperty('--start-x', startX);
+                globo.style.setProperty('--duration', duration);
+                globo.style.setProperty('--wobble', wobble);
+                globo.style.setProperty('--offset', offset);
+                globo.style.setProperty('--rotate', rotate);
+                globo.style.left = startX;
+                globo.style.transform = `scale(${scale})`;
+                
+                // Colores más vibrantes
+                const hue = Math.random() * 360;
+                const saturation = 80 + Math.random() * 20;
+                const lightness = 50 + Math.random() * 20;
+                globo.style.filter = `
+                    hue-rotate(${hue}deg) 
+                    saturate(${saturation}%) 
+                    brightness(${lightness}%) 
+                    drop-shadow(0 0 15px rgba(255,255,255,0.4))
+                `;
+                
+                globosContainer.appendChild(globo);
+                
+                setTimeout(() => {
+                    globo.remove();
+                }, parseFloat(duration) * 1000);
+            }
+            
+            // Crear más globos iniciales y más frecuentemente
+            for(let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    createGlobo();
+                }, i * 800);
+            }
+            
+            // Crear globos más frecuentemente
+            setInterval(() => {
+                createGlobo();
+            }, 1000);
+        }
+
+        // Iniciar la animación de globos
+        createGlobos();
+
+        // Actualizar el intervalo de brillo de estrellas
+        setInterval(() => {
+            const stars = document.querySelectorAll('.star');
+            // Hacer brillar múltiples estrellas a la vez
+            for(let i = 0; i < 3; i++) {
+                const randomStar = stars[Math.floor(Math.random() * stars.length)];
+                randomStar.style.transform = 'scale(2)';
+                setTimeout(() => {
+                    randomStar.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }, 500);
+
+        // Función para intentar reproducir el video
+        function playVideo() {
+            const iframe = document.querySelector('.video-container iframe');
+            
+            // Intentar reproducir usando postMessage
+            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            
+            // También intentar usando el API de YouTube
+            if (window.YT && window.YT.Player) {
+                new YT.Player(iframe, {
+                    events: {
+                        'onReady': function(event) {
+                            event.target.playVideo();
+                        }
+                    }
+                });
+            }
+        }
+
+        // Intentar reproducir cuando se carga la página
+        window.addEventListener('load', playVideo);
+        
+        // Intentar reproducir cuando el usuario interactúa
+        document.addEventListener('click', playVideo, { once: true });
+        document.addEventListener('touchstart', playVideo, { once: true });
+
+        // Carrusel de lunas
+        const moonImages = [
+            'https://images.unsplash.com/photo-1522030299830-16b8d3d049fe',
+            'https://images.unsplash.com/photo-1532693322450-2cb5c511067d',
+            'https://images.unsplash.com/photo-1518141532615-4305c9f914c9',
+            'https://images.unsplash.com/photo-1435224668334-0f82ec57b605',
+            'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3',
+            'https://images.unsplash.com/photo-1507400492013-162706c8c05e',
+            'https://images.unsplash.com/photo-1494022299300-899b96e49893',
+            'https://images.unsplash.com/photo-1540198163009-7afda7da2945',
+            'https://images.unsplash.com/photo-1532767153582-b1a0e5145009',
+            'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45',
+            'https://images.unsplash.com/photo-1504805572947-34fad45aed93',
+            'https://images.unsplash.com/photo-1548391350-968f58dedaed'
+        ];
+        
+        let currentMoonIndex = 0;
+
+        function updateMoonImage() {
+            const moonImg = document.querySelector('.moon-image');
+            if (moonImages.length > 0) {
+                moonImg.style.opacity = '0';
+                setTimeout(() => {
+                    moonImg.src = moonImages[currentMoonIndex];
+                    moonImg.style.opacity = '1';
+                }, 300);
+            }
+        }
+
+        function nextMoon() {
+            currentMoonIndex = (currentMoonIndex + 1) % moonImages.length;
+            updateMoonImage();
+        }
+
+        function prevMoon() {
+            currentMoonIndex = (currentMoonIndex - 1 + moonImages.length) % moonImages.length;
+            updateMoonImage();
+        }
+
+        // Cargar la primera imagen cuando la página se cargue
+        updateMoonImage();
+
+        // Cambiar imagen automáticamente cada 3 segundos
+        setInterval(nextMoon, 3000);
+
+        const backgroundMusic = document.getElementById('background-music');
+        const musicControl = document.querySelector('.music-control');
+        let isPlaying = true;
+
+        // Configurar volumen máximo
+        backgroundMusic.volume = 1.0;
+
+        // Intentar reproducir inmediatamente
+        window.onload = function() {
+            try {
+                backgroundMusic.play();
+            } catch(e) {
+                console.log("Reproducción automática bloqueada");
+            }
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                backgroundMusic.pause();
+                musicControl.textContent = '🔈';
+            } else {
+                backgroundMusic.play();
+                musicControl.textContent = '🔊';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Asegurarse de que la música comience con la interacción del usuario
+        document.addEventListener('click', function() {
+            backgroundMusic.play();
+        }, { once: true });
+
+        function apagarVelas() {
+            const llamas = document.querySelectorAll('.llama');
+            llamas.forEach(llama => {
+                llama.classList.add('apagada');
+            });
+
+            // Mostrar mensaje después de apagar las velas
+            setTimeout(() => {
+                alert('¡Feliz Cumpleaños! 🎉 Que todos tus deseos se hagan realidad ✨');
+            }, 1000);
+        }
+    </script>
+
+    <!-- Agregar el API de YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>

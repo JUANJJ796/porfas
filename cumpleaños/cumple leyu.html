@@ -1,0 +1,23 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval' data: blob:; media-src *">
+    <title>¡Feliz Cumpleaños!</title>
+    
+    <!-- Permisos para audio y multimedia -->
+    <meta name="permissions-policy" content="autoplay=*, camera=(), microphone=()">
+    
+    <!-- Permitir reproducción automática -->
+    <meta name="autoplay-policy" content="no-user-gesture-required">
+    
+    <!-- Permisos para recursos externos -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' https: data: blob:; 
+        style-src 'self' 'unsafe-inline' https:; 
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; 
+        media-src * data: blob:;
+        img-src * data: blob:;
+        connect-src *;
+    ">
+</head> 
